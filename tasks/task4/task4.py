@@ -1,7 +1,7 @@
 # period = 7
-period = int(input())
-temperature = [int(item) for item in input().split()]
-# temperature = [-1, -10, -8, 0, 2, 0, 5]
+# period = int(input())
+# temperature = [int(item) for item in input().split()]
+temperature = [-1, -10, -8, 0, 2, 0, 5]
 # temperature = [1, 2, 5, 4, 8]
 
 
