@@ -1,29 +1,21 @@
-# ID: 52411374
+# ID: 52434276
 
-from typing import List
-
-street_length = input()
-house_numbers = input()
-listNumbers = list(map(int, house_numbers.split()))
-
-
-def nearest_zero(distance: List[int]):
-    zeros = [float('inf')] * len(distance)
-    index_zeros = [i for i in range(len(distance)) if distance[i] == 0]
-    for i in range(index_zeros[0], len(distance), +1):
-        if distance[i] == 0:
-            zeros[i] = 0
+def zero_dists(start, seq):
+    """Дистанция до 0"""
+    value = '0'
+    d = start
+    for n in seq:
+        if n == value:
+            d = 0
         else:
-            zeros[i] = zeros[i-1] + 1
-    for i in range(index_zeros[-1], index_zeros[0], -1):
-        if distance[i] == 0:
-            zeros[i] = 0
-        else:
-            zeros[i] = min(zeros[i], zeros[i + 1] + 1)
-    for i in range(index_zeros[0] - 1, -1, -1):
-        zeros[i] = zeros[i + 1] + 1
-    result = ' '.join(str(x) for x in zeros)
-    return result
+            d += 1
+        yield d
 
 
-print(nearest_zero(listNumbers))
+input()
+numbers = input().split()
+
+to_left = zero_dists(len(numbers), numbers)
+to_right = reversed(tuple(zero_dists(len(numbers), reversed(numbers))))
+
+print(*map(min, zip(to_left, to_right)))
