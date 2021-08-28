@@ -1,7 +1,7 @@
-# ID: 52434276
+# ID: 52461815
 
 def zero_dists(start, seq):
-    """Дистанция до 0"""
+    """Дистанция до нуля."""
     value = '0'
     d = start
     for n in seq:
@@ -12,10 +12,19 @@ def zero_dists(start, seq):
         yield d
 
 
-input()
-numbers = input().split()
+def distance_counter(values: list[str]):
+    """Счетчик дистанции до нуля."""
+    to_left = zero_dists(len(values), values)
+    to_right = reversed(tuple(zero_dists(len(values), reversed(values))))
+    return map(min, zip(to_left, to_right))
 
-to_left = zero_dists(len(numbers), numbers)
-to_right = reversed(tuple(zero_dists(len(numbers), reversed(numbers))))
 
-print(*map(min, zip(to_left, to_right)))
+def main(values: list[str]):
+    return distance_counter(values)
+
+
+if __name__ == '__main__':
+    input()
+    numbers = input().split()
+    result = main(numbers)
+    print(*result)

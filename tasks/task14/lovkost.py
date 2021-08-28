@@ -1,4 +1,4 @@
-# ID: 52461334
+# ID: 52461822
 
 from typing import List
 from collections import Counter
@@ -21,7 +21,6 @@ def counter_scores(all_values: List[int], factor: int) -> int:
 
 
 def main(all_values: List[int], factor: int) -> int:
-    """Бизнес-логика при запуске этого модуля как основного!"""
     return counter_scores(all_values, factor)
 
 
