@@ -14,12 +14,14 @@ class Node:
             node = node.next_item
         return -1
 
+
 def test():
     node3 = Node("node3", None)
     node2 = Node("node2", node3)
     node1 = Node("node1", node2)
     node0 = Node("node0", node1)
     idx = Node.solution(node0, "node2")
+    print("[idx]", idx)
     # result is idx == 2
 
 
