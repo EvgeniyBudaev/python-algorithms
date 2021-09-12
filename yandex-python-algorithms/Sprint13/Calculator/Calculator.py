@@ -1,56 +1,50 @@
-# 52750974
-import operator
+# 52963688
+from operator import add, floordiv, mul, sub
+from typing import List
+
+OPERATORS = {
+        '+': add,
+        '-': sub,
+        '/': floordiv,
+        '*': mul
+        }
 
 
 class Stack:
+    """Структура данных стек."""
     def __init__(self):
-        self.items = []
+        self.__items = []
 
     def push(self, item):
         """Добавляет элемент на вершину стека."""
-        self.items.append(item)
+        self.__items.append(item)
 
     def peek(self):
         """ Возвращает элемент с вершины стека, не удаляя его."""
-        return self.items[-1]
+        return self.__items[-1]
 
     def pop(self):
         """Возвращает элемент с вершины стека и удаляет его."""
-        return self.items.pop()
+        return self.__items.pop()
 
 
-def division(first, second):
-    """Деление."""
-    if second != 0:
-        return first // second
-
-
-def operator_choose(symbol, first, second):
-    """Выбор оператора."""
-    return {'+': operator.add(first, second),
-            '-': operator.sub(first, second),
-            '*': operator.mul(first, second),
-            '/': division(first, second),
-            }.get(symbol)
-
-
-def calculator(expression):
+def calculator(stack, symbols_list: List[str]):
     """Калькулятор."""
-    expression = list(expression)
-    for commands in expression:
-        if (commands != '+' and commands != '-' and commands != '/'
-                and commands != '*'):
-            stack.push(int(commands))
+    for symbol in symbols_list:
+        if symbol not in OPERATORS:
+            stack.push(int(symbol))
         else:
-            second_operand = int(stack.pop())
-            first_operand = int(stack.peek())
-            symbol = commands
-            stack.items[-1] = operator_choose(symbol,
-                                              first_operand,
-                                              second_operand)
-    return stack.peek()
+            num_a, num_b = stack.pop(), stack.pop()
+            stack.push(OPERATORS[symbol](num_b, num_a))
+
+    return stack.pop()
+
+
+def main(values: List[str]):
+    stack = Stack()
+    return calculator(stack, values)
 
 
 if __name__ == '__main__':
-    stack = Stack()
-    print(calculator(input().split()))
+    values_list = list(map(str, input().split()))
+    print(main(values_list))
