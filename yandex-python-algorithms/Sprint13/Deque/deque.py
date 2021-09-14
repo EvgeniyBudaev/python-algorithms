@@ -1,9 +1,9 @@
-# 52964549
+# 53044384
 class Deque:
     def __init__(self, n):
         self.__deque_list = [None] * n
         self.__max_size = n
-        self.__front, self.__back, self.__size = 0, 0, 0
+        self.__front = self.__back = self.__size = 0
 
     def is_empty(self):
         """Проверить на пустоту."""

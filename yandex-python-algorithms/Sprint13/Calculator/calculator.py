@@ -1,4 +1,4 @@
-# 52963688
+# 53044376
 from operator import add, floordiv, mul, sub
 from typing import List
 
@@ -41,8 +41,7 @@ def calculator(stack, symbols_list: List[str]):
 
 
 def main(values: List[str]):
-    stack = Stack()
-    return calculator(stack, values)
+    return calculator(Stack(), values)
 
 
 if __name__ == '__main__':
