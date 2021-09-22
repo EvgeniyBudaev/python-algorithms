@@ -10,4 +10,3 @@ def generate(n, open, close, cur):
 
 if __name__ == '__main__':
     generate(int(input()), 0, 0, '')
-    
