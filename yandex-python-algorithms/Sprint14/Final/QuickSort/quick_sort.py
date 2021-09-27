@@ -30,10 +30,25 @@ if __name__ == '__main__':
     строк задана информация про одного из участников. i-й участник 
     описывается тремя параметрами: уникальным логином,числом решённых задач, 
     штрафом."""
-    length = int(input())
-    players = [(lambda login, task_count, fine: (-int(task_count),
-                                                int(fine),
-                                                login))(*input().split(' '))
-               for _ in range(length)]
-    quick_sort(players)
-    print(*[player[2] for player in players], sep='\n')
+    class Participant:
+        def __init__(self, name: str, tasks: str, penalties: str) -> None:
+            self.name = name
+            self.tasks = int(tasks)
+            self.penalties = int(penalties)
+
+        def __lt__(self, prev: 'Participant') -> bool:
+            if self.tasks == prev.tasks:
+                if self.penalties == prev.penalties:
+                    return self.name < prev.name
+                return self.penalties < prev.penalties
+            return self.tasks > prev.tasks
+
+        def __str__(self) -> str:
+            return self.name
+
+    print(
+        *quick_sort(
+            [Participant(*input().split()) for _ in range(int(input()))]
+            ),
+        sep='\n'
+        )
